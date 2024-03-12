@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Búsqueda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .pokemon-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pokemon-info p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .sugerencias {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .redes-sociales {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .redes-sociales a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .redes-sociales a:hover {
+            background-color: #0056b3;
+        }
+
+        .detalles-adicionales {
+            margin-bottom: 20px;
+        }
+
+        .detalles-adicionales h2 {
+            color: #333;
+        }
+
+        .comentarios {
+            margin-bottom: 20px;
+        }
+
+        .comentarios h2 {
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado de Búsqueda</h1>
+        <form action="/buscar" method="post">
+            <input type="text" name="nombre_pokemon" placeholder="Ingrese el nombre de un Pokémon" list="pokemons">
+            <datalist id="pokemons">
+                {% for pokemon in pokemons %}
+                <option value="{{ pokemon }}">
+                {% endfor %}
+            </datalist>
+            <select name="tipo_pokemon">
+                <option value="">Todos los tipos</option>
+                {% for tipo in tipos %}
+                <option value="{{ tipo }}">{{ tipo }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+        <div class="pokemon-info">
+            <p>Nombre: {{ nombre }}</p>
+            <p>ID: {{ id_pokemon }}</p>
+            <p>Tipos: {{ ', '.join(tipos) }}</p>
+            <p>Habilidades: {{ ', '.join(habilidades) }}</p>
+            <img src="{{ imagen_url }}" alt="Imagen de Pokémon">
+            <p>Descripción Pokédex: {{ descripcion_pokedex }}</p>
+            <p>Regiones de aparición: {{ ', '.join(regiones_aparicion) }}</p>
+            <p>Debilidades: {{ ', '.join(debilidades) }}</p>
+        </div>
+        {% if sugerencia %}
+        <div class="sugerencias">¿Quisiste decir '{{ sugerencia }}'?</div>
+        {% endif %}
+
+        <!-- Botones de redes sociales -->
+        <div class="redes-sociales">
+            <h2>Compartir en redes sociales:</h2>
+            <a href="https://twitter.com/intent/tweet?text=¡Mira este Pokémon increíble! {{ nombre }}&url={{ request.url }}" target="_blank">Compartir en Twitter</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank">Compartir en Facebook</a>
+        </div>
+
+        <!-- Detalles adicionales del Pokémon -->
+        <div class="detalles-adicionales">
+            <h2>Detalles adicionales:</h2>
+            <!-- Aquí puedes agregar más detalles sobre el Pokémon -->
+        </div>
+
+        
+    </div>
+</body>
+</html>

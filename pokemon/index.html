@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Pokémon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"], select, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .historial {
+            text-align: center;
+        }
+
+        .historial ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .historial ul li {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Centro Pokémon</h1>
+        <form action="/buscar" method="post">
+            <input type="text" name="nombre_pokemon" placeholder="Ingrese el nombre de un Pokémon" list="pokemons">
+            <datalist id="pokemons">
+                {% for pokemon in pokemons %}
+                <option value="{{ pokemon }}">
+                {% endfor %}
+            </datalist>
+            <select name="tipo_pokemon">
+                <option value="">Todos los tipos</option>
+                {% for tipo in tipos %}
+                <option value="{{ tipo }}">{{ tipo }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+        <div class="historial">
+            <h2>Historial de Búsqueda:</h2>
+            <ul>
+                {% for pokemon in historial_busqueda %}
+                <li>{{ pokemon }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
