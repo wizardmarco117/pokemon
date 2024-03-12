@@ -21,7 +21,7 @@ def obtener_descripcion_pokedex(nombre_pokemon):
     url = f"https://pokeapi.co/api/v2/pokemon-species/{nombre_pokemon}"
     try:
         respuesta = requests.get(url)
-        respuesta.raise_for_status()  # Lanzar una excepción en caso de error de solicitud
+        respuesta.raise_for_status()  # Lanzar una excepción en caso de error de solicitud.
         
         datos = respuesta.json()
         descripcion = datos['flavor_text_entries'][0]['flavor_text']  # Tomamos la primera descripción, podrías ajustarlo si deseas una en particular
