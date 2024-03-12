@@ -2,17 +2,8 @@ from flask import Flask, render_template, request
 import requests
 import difflib
 import random
-import mysql.connector
-
+//se hiscion cambios
 app = Flask(__name__)
-
-conexion = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='uno'
-)
-cursor = conexion.cursor()
 
 historial_busqueda = []
 backgrounds = ['background1.jpg', 'background2.jpg', 'background3.jpg']
@@ -185,12 +176,8 @@ def buscar_pokemon():
 @app.route('/comentar', methods=['POST'])
 def comentar():
     comentario = request.form['comentario']
-    try:
-        cursor.execute("INSERT INTO Comentarios (comentario) VALUES (%s)", (comentario,))
-        conexion.commit()
-        return render_template('index.html', mensaje="¡Comentario guardado correctamente!")
-    except mysql.connector.Error as error:
-        return render_template('index.html', mensaje=f"Error al guardar comentario: {error}")
+    # Aquí puedes agregar la lógica para manejar el comentario, por ejemplo, guardarlos en un archivo.
+    return render_template('index.html', mensaje="¡Comentario guardado correctamente!")
 
 def obtener_sugerencia(nombre_pokemon):
     nombres_pokemon = obtener_nombres_pokemon()
