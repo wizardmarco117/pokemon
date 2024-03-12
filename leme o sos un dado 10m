@@ -1,0 +1,4 @@
+para que la aplicacion funcione bien nesesitas esta dependencia 
+py -m pip install Flask
+y ya con eso funciona alta piola 
+se pone en el cmd
