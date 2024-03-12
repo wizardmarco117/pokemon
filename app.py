@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import requests
 import difflib
 import random
-//se hiscion cambios
+
 app = Flask(__name__)
 
 historial_busqueda = []
